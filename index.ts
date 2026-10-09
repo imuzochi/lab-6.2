@@ -1,4 +1,5 @@
 import { fetchProductCatalog, fetchProductReviews, fetchSalesReport } from "./apiSimulator.js";
+import { NetworkError, DataError } from "./error.js";
 
 fetchProductCatalog()
     .then((catalog) => {
@@ -10,5 +11,13 @@ fetchProductCatalog()
         console.log("Sales Report:", salesReport);
     })
     .catch((error) => {
-        console.log("Error:", error);
+        if (error instanceof NetworkError) {
+            console.error("Network Error:", error.message);
+        } 
+        else {
+            console.error("Data Error:", error.message);
+        }
     })
+    .finally(() => {
+        console.log("All API calls have been attempted.");
+    });
