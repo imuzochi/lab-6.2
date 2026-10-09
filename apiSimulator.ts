@@ -30,3 +30,23 @@ export const fetchProductReviews = (productId: number): Promise<Reviews[]> => {
         }, 1500);
     });
 };
+
+interface Report {
+    totalSales: number;
+    unitsSold: number;
+    averagePrice: number;
+};
+
+export const fetchSalesReport = (): Promise<Report> => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            let myReport: Report = {totalSales: 10000000, unitsSold: 20000, averagePrice: 500};
+            if (Math.random() < 0.75) {
+                resolve(myReport);
+            }
+            else {
+                reject("Failed to fetch sales report.");
+            }
+        }, 1000);
+    });
+};
